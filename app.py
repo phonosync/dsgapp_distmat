@@ -10,6 +10,14 @@ output_fn = None
 
 st.title("Convert images to xlsx")
 
+st.write('''The pixel intensities from the image file(s) are extracted into an xlsx-file. If a single image is provided, a separate 
+         worksheet is created for each channel with the corresponding image height x width pixel intensities in a matrix. Greyscale
+         images result into one worksheet only. \\
+         If multiple image files are uploaded, only one sheet is created with all the pixel intensities for the images 
+         (and their color channels) reshaped into individual rows indexed by the original filenames. Attention: Unequal pixel
+         dimensions of the images leads to inconsistent number of columns in the excel sheet.
+         ''')
+
 to_greyscale = st.checkbox('Convert to greyscale')
 
 # sheet_per_channel = st.checkbox('arrays of multi-channel input images will be split into separate worksheets of the resulting Excel (one worksheet per channel)')
@@ -27,7 +35,7 @@ if len(uploaded_files) > 1:
 
 # create xlsx
 
-#if single image: one sheet per channel, 2d
+#if single image: one sheet per channel, 2d-matrix height x width pixels
 #else: one sheet. one row per file, channels appended
 
 if len(uploaded_files) == 1:
@@ -85,7 +93,7 @@ if len(uploaded_files) > 1:
         n_pixels = 1
         for val in arr.shape:
             n_pixels *= val
-        st.write(arr.reshape(n_pixels).shape)
+        # st.write(arr.reshape(n_pixels).shape)
         
         fns.append(uploaded_file.name)
         pixel_arrays.append(list(arr.reshape(n_pixels)))
@@ -100,7 +108,6 @@ if len(uploaded_files) > 1:
     wb.save(buffer)
     output_fn = 'pixel_intensities.xlsx'
 
-st.write('blue')
 if output_fn:
     st.download_button(
             label="Download pixel intensities as xlsx",
