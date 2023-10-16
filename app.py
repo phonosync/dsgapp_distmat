@@ -9,7 +9,7 @@ model = None
 
 if not model:
     # select metric
-    metric = st.selectbox('Wähle Distanz-Metrik',
+    metric = st.selectbox('Wählen Sie die zu berechnende Distanz-Metrik',
                                 ['cityblock', 'cosine', 'euclidean', 'l1', 'l2', 'manhattan']
                                 )
     
