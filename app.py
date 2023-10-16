@@ -10,8 +10,9 @@ model = None
 if not model:
     # select metric
     metric = st.selectbox('Wählen Sie die zu berechnende Distanz-Metrik',
-                                ['cityblock', 'cosine', 'euclidean', 'l1', 'l2', 'manhattan']
-                                )
+                                ['cityblock', 'cosine', 'euclidean', 'l1',
+                                 'l2', 'manhattan']
+                         )
     
     st.write("Laden Sie ein csv-File mit den Daten hoch. Ein Sample pro Zeile. Die erste Reihe wird als Kopfzeile Variablen-Namen interpretier.")
     df_sample_inp = pd.DataFrame({'Variable 1': [0.0, 4.1, 2.3], 'Variable 2': [0, 1, 1], 'Variable 3': [5, 3, 9]})
