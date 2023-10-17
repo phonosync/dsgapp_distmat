@@ -36,7 +36,7 @@ if not model:
     index_column = st.checkbox('Erste Spalte enthält Sample-Indices')
     header_row = st.checkbox('Erste Zeile enthält Spalten-Labels') 
 
-    inp_file = st.file_uploader("Wählen Sie ein File")
+    inp_file = st.file_uploader("Wählen Sie eine csv-Datei")
     if inp_file is not None:
         
         if index_column:
