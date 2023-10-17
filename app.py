@@ -15,6 +15,11 @@ if not model:
                                  'l2', 'manhattan']
                          )
     
+    if metric == 'cosine':
+        st.warning('''`cosine` berechnet nicht die Kosinus-Ähnlichkeit, sondern
+                    die Kosinus-Distanz zwischen zwei Vektoren 
+                $=1-\\frac{\mathbf{u}\cdot \mathbf{v}}{||\mathbf{u}|| \cdot ||\mathbf{v}||}$''',icon="⚠️")
+
     st.write('''Laden Sie eine csv-Datei mit den Daten hoch. Ein Sample pro 
              Zeile. Die erste Reihe wird als Kopfzeile Variablen-Namen interpretiert.''')
     df_sample_inp = pd.DataFrame({'Variable 1': [0.0, 4.1, 2.3], 'Variable 2': [0, 1, 1], 
@@ -48,8 +53,10 @@ if not model:
         else:
             header = None
 
-        with open(inp_file) as csvfile:
-            dialect = csv.Sniffer().sniff(csvfile.read())
+
+        bla = io.StringIO(inp_file.getvalue().decode("utf-8"))
+
+        dialect = csv.Sniffer().sniff(bla.read())
         
         df = pd.read_csv(inp_file, dialect=dialect, index_col=index_col, header=header)
         
