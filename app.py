@@ -48,7 +48,7 @@ if not model:
         else:
             header = None
 
-        with open(inp_file, newline='') as csvfile:
+        with open(inp_file) as csvfile:
             dialect = csv.Sniffer().sniff(csvfile.read())
         
         df = pd.read_csv(inp_file, dialect=dialect, index_col=index_col, header=header)
